@@ -1,0 +1,104 @@
+.icon {
+	display: inline-block;
+	background-repeat: no-repeat;
+	vertical-align: bottom; 
+}
+
+.ic-small {
+	background-size: 14px 14px;
+	width: 14px;
+	height: 14px;
+}
+
+.ic-default {
+	background-size: 16px 16px;
+	width: 16px;
+	height: 16px;
+}
+
+.ic-default2 {
+	background-size: 18px 18px;
+	width: 18px;
+	height: 18px;
+}
+
+.ic-medium {
+	background-size: 24px 24px;
+	width: 24px;
+	height: 24px;
+}
+
+.ic-large {
+	background-size: 32px 32px;
+	width: 32px;
+	height: 32px;
+}
+
+.ic-position-1 {
+	background-position: 3px;
+}
+
+.ic-position-2 {
+	background-position: 5px;
+}
+
+.ic-position-3 {
+	background-position: 8px;
+	padding-left: 35px;
+}
+
+.ic-position-4 {
+	background-position: 12px;
+}
+
+/*---------------------------------------------------------------------------------*/
+
+.ic-arrow-down-1-g {
+	background-image: url(icons/gray/arrow-down/arrow-219-xl.png);
+}
+
+.ic-arrow-down-2-g {
+	background-image: url(icons/gray/arrow-down/arrow-221-xl.png);
+}
+
+.ic-user-g {
+	background-image: url(icons/gray/users/user-xl.png);
+}
+
+.ic-key-g {
+	background-image: url(icons/gray/key/key-xl.png);
+}
+
+.ic-close-w {
+	background-image: url(icons/white/remove/x-mark-xl.png);
+}
+
+.ic-error {
+	background-image: url('icons/soylent_red/error/alert-xl.png');
+}
+
+.ic-patient-g {
+	background-image: url('icons/gray/users/user-xl.png');
+}
+
+.ic-nurse-g {
+	background-image: url('icons/gray/users/nurse-xl.png');
+}
+
+.ic-doctor-g {
+	background-image: url('icons/gray/users/doctor-xl.png');
+}
+
+.ic-admin-g {
+	background-image: url('icons/gray/users/administrator-xl.png');
+}
+
+/*---------------------------------------------------------------------------------*/
+
+.marg-left {
+	margin-left: 5px;
+}
+
+.marg-right {
+	margin-right: 5px;
+}

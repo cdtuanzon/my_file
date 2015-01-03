@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">ncare</database>
+</source>
+<canvas zoom="90">
+<tables>
+<table name="admin" view="colnames">
+<left>13</left>
+<top>147</top>
+<width>104</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `admin` (
+  `admin_id` varchar(20) NOT NULL,
+  `company_id` varchar(20) DEFAULT NULL,
+  `admin_info` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`admin_id`),
+  KEY `admin_info` (`admin_info`),
+  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`admin_info`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="client" view="colnames">
+<left>18</left>
+<top>283</top>
+<width>94</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `client` (
+  `client_id` varchar(20) NOT NULL,
+  `client_info` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`client_id`),
+  KEY `client_info` (`client_info`),
+  CONSTRAINT `client_ibfk_1` FOREIGN KEY (`client_info`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="conversation" view="colnames">
+<left>647</left>
+<top>410</top>
+<width>103</width>
+<height>127</height>
+<sql_create_table>CREATE TABLE `conversation` (
+  `convo_id` varchar(20) NOT NULL,
+  `sender_id` varchar(20) DEFAULT NULL,
+  `recipient_id` varchar(20) DEFAULT NULL,
+  `message_id` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`convo_id`),
+  KEY `first_person_info` (`sender_id`),
+  KEY `second_person_info` (`recipient_id`),
+  KEY `message_id` (`message_id`),
+  CONSTRAINT `conversation_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `conversation_ibfk_2` FOREIGN KEY (`recipient_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `conversation_ibfk_3` FOREIGN KEY (`message_id`) REFERENCES `message` (`message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="doctor" view="colnames">
+<left>12</left>
+<top>10</top>
+<width>104</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `doctor` (
+  `doctor_id` varchar(20) NOT NULL,
+  `company_id` varchar(20) DEFAULT NULL,
+  `doctor_info` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`doctor_id`),
+  KEY `doctor_info` (`doctor_info`),
+  CONSTRAINT `doctor_ibfk_1` FOREIGN KEY (`doctor_info`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="guardian" view="colnames">
+<left>869</left>
+<top>423</top>
+<width>112</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `guardian` (
+  `guardian_id` varchar(20) NOT NULL,
+  `guardian_info` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`guardian_id`),
+  KEY `guard_info` (`guardian_info`),
+  CONSTRAINT `guardian_ibfk_1` FOREIGN KEY (`guardian_info`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="invoice" view="colnames">
+<left>331</left>
+<top>386</top>
+<width>127</width>
+<height>158</height>
+<sql_create_table>CREATE TABLE `invoice` (
+  `inv_id` varchar(20) NOT NULL,
+  `inv_info` int(11) DEFAULT NULL,
+  `inv_date` date DEFAULT NULL,
+  `inv_payer` varchar(20) DEFAULT NULL,
+  `inv_amount_due` decimal(9,2) DEFAULT NULL,
+  `inv_note` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`inv_id`),
+  KEY `inv_payer` (`inv_payer`),
+  CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`inv_payer`) REFERENCES `payer` (`payer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="message" view="colnames">
+<left>498</left>
+<top>431</top>
+<width>103</width>
+<height>127</height>
+<sql_create_table>CREATE TABLE `message` (
+  `message_id` varchar(20) NOT NULL,
+  `content` text,
+  `date_sent` date DEFAULT NULL,
+  `date_recv` date DEFAULT NULL,
+  PRIMARY KEY (`message_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="nurse" view="colnames">
+<left>21</left>
+<top>399</top>
+<width>104</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `nurse` (
+  `nurse_id` varchar(20) NOT NULL,
+  `company_id` varchar(20) DEFAULT NULL,
+  `nurse_info` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`nurse_id`),
+  KEY `nurse_info` (`nurse_info`),
+  CONSTRAINT `nurse_ibfk_1` FOREIGN KEY (`nurse_info`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="patient" view="colnames">
+<left>651</left>
+<top>3</top>
+<width>126</width>
+<height>188</height>
+<sql_create_table>CREATE TABLE `patient` (
+  `patient_id` varchar(20) NOT NULL,
+  `patient_info` varchar(20) DEFAULT NULL,
+  `date_admitted` date DEFAULT NULL,
+  `date_discharged` date DEFAULT NULL,
+  `assigned_nurse` varchar(20) DEFAULT NULL,
+  `assigned_doctor` varchar(20) DEFAULT NULL,
+  `assigned_room` varchar(10) DEFAULT NULL,
+  `prescription` text,
+  PRIMARY KEY (`patient_id`),
+  KEY `patient_info` (`patient_info`),
+  KEY `assigned_nurse` (`assigned_nurse`),
+  KEY `assigned_doctor` (`assigned_doctor`),
+  KEY `assigned_room` (`assigned_room`),
+  CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patient_info`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `patient_ibfk_2` FOREIGN KEY (`assigned_nurse`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `patient_ibfk_3` FOREIGN KEY (`assigned_doctor`) REFERENCES `doctor` (`doctor_id`),
+  CONSTRAINT `patient_ibfk_4` FOREIGN KEY (`assigned_room`) REFERENCES `room` (`room_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="patient_guardian" view="colnames">
+<left>1002</left>
+<top>35</top>
+<width>109</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `patient_guardian` (
+  `pat_guard_id` varchar(20) NOT NULL,
+  `patient_id` varchar(20) DEFAULT NULL,
+  `guardian_id` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`pat_guard_id`),
+  KEY `pat_id` (`patient_id`),
+  KEY `guard_id` (`guardian_id`),
+  CONSTRAINT `patient_guardian_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`),
+  CONSTRAINT `patient_guardian_ibfk_2` FOREIGN KEY (`guardian_id`) REFERENCES `guardian` (`guardian_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="payer" view="colnames">
+<left>184</left>
+<top>435</top>
+<width>96</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `payer` (
+  `payer_id` varchar(20) NOT NULL,
+  `payer_info` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`payer_id`),
+  KEY `payer_info` (`payer_info`),
+  CONSTRAINT `payer_ibfk_1` FOREIGN KEY (`payer_info`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="room" view="colnames">
+<left>853</left>
+<top>115</top>
+<width>98</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `room` (
+  `room_id` varchar(20) NOT NULL,
+  `room_desc` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`room_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="serv_acquired" view="colnames">
+<left>819</left>
+<top>296</top>
+<width>109</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `serv_acquired` (
+  `patient_id` varchar(20) DEFAULT NULL,
+  `serv_desc_id` varchar(20) DEFAULT NULL,
+  KEY `patient_id` (`patient_id`),
+  KEY `serv_desc_id` (`serv_desc_id`),
+  CONSTRAINT `serv_acquired_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`),
+  CONSTRAINT `serv_acquired_ibfk_2` FOREIGN KEY (`serv_desc_id`) REFERENCES `service` (`serv_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="service" view="colnames">
+<left>1029</left>
+<top>304</top>
+<width>94</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `service` (
+  `serv_id` varchar(20) NOT NULL,
+  `serv_desc` text,
+  PRIMARY KEY (`serv_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="user" view="colnames">
+<left>354</left>
+<top>103</top>
+<width>104</width>
+<height>265</height>
+<sql_create_table>CREATE TABLE `user` (
+  `user_id` varchar(30) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `firstname` varchar(50) DEFAULT NULL,
+  `middlename` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `fax` varchar(20) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
